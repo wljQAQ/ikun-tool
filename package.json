@@ -1,0 +1,25 @@
+{
+  "name": "wlj_template",
+  "version": "1.0.0",
+  "description": "项目模板",
+  "main": "bin/index.js",
+  "bin": {
+    "wlj_template": "bin/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wljQAQ/wlj_template.git"
+  },
+  "keywords": [
+    "template"
+  ],
+  "author": "wlj",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wljQAQ/wlj_template/issues"
+  },
+  "homepage": "https://github.com/wljQAQ/wlj_template#readme"
+}
