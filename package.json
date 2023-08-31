@@ -1,17 +1,17 @@
 {
-  "name": "wlj_template",
+  "name": "ikun-tool",
   "version": "1.0.0",
   "description": "项目模板",
   "main": "bin/index.js",
   "bin": {
-    "wlj_template": "bin/index.js"
+    "ikun-tool": "bin/index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wljQAQ/wlj_template.git"
+    "url": "git+https://github.com/wljQAQ/ikun-tool.git"
   },
   "keywords": [
     "template"
@@ -19,7 +19,15 @@
   "author": "wlj",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/wljQAQ/wlj_template/issues"
+    "url": "https://github.com/wljQAQ/ikun-tool/issues"
   },
-  "homepage": "https://github.com/wljQAQ/wlj_template#readme"
+  "homepage": "https://github.com/wljQAQ/ikun-tool#readme",
+  "dependencies": {
+    "chalk": "^5.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.5.7",
+    "typescript": "^5.2.2",
+    "vite": "^4.4.9"
+  }
 }

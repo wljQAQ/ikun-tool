@@ -1,1 +1,2 @@
-console.log("hello world! npm!");
+#!/usr/bin/env node
+require("../dist/ikun-tool").run();
