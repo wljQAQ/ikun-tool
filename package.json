@@ -2,12 +2,20 @@
   "name": "ikun-tool",
   "version": "1.0.0",
   "description": "项目模板",
-  "main": "bin/index.js",
-  "bin": {
-    "ikun-tool": "bin/index.js"
+  "main": "./dist/ikun-tool.js",
+  "module": "./dist/ikun-tool.js",
+  "lib": {
+    "ikun-tool": "./bin/index.js"
+  },
+  "exports": {
+    ".": {
+      "require": "./dist/ikun-tool.js"
+    }
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "webpack --config webpack.dev.js",
+    "dev": "npm run watch"
   },
   "repository": {
     "type": "git",
@@ -27,7 +35,11 @@
   },
   "devDependencies": {
     "@types/node": "^20.5.7",
+    "@types/webpack": "^5.28.2",
+    "ts-loader": "^9.4.4",
     "typescript": "^5.2.2",
-    "vite": "^4.4.9"
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-merge": "^5.9.0"
   }
 }
