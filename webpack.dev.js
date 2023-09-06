@@ -9,5 +9,8 @@ module.exports = merge(common, {
   watchOptions: {
     ignored: /node_modules/,
   },
-  plugins: [new IkunPlugun()],
+  stats: 'errors-warnings',
+  plugins: [
+    new IkunPlugun(),
+  ],
 });
