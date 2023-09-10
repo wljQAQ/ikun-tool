@@ -4,7 +4,10 @@ const { spawn, exec } = require("child_process");
 class IkunPlugun {
   apply(compiler) {
     compiler.hooks.afterEmit.tapAsync("IkunPlugun", (compilation, callback) => {
-      spawn("npx", ["ikun-tool"], { shell: true, stdio: "inherit" });
+      spawn("npx", ["ikun-tool", "create", "XXX"], {
+        shell: true,
+        stdio: "inherit",
+      });
 
       callback();
     });
