@@ -4,4 +4,5 @@ interface Tool {
 interface Plugin {
   command: string;
   install(tool: Tool): void;
+  run(): void;
 }

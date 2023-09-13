@@ -19,7 +19,7 @@ export class IkunTool implements Tool {
 
   run() {
     const cmd = this.tools.get(this.command);
-    console.log(cmd);
+    cmd.run();
   }
 
   welcome() {
