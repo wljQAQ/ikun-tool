@@ -6,5 +6,5 @@ export function run() {
 
   ikunTool.use(creator);
 
-  ikunTool.run()
+  ikunTool.run();
 }

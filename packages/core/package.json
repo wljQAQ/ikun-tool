@@ -1,5 +1,5 @@
 {
-  "name": "ikun-tool",
+  "name": "@ikun/core",
   "version": "1.0.0",
   "description": "项目模板",
   "main": "./dist/ikun-tool.js",
@@ -8,9 +8,13 @@
     "node": ">=16.10.0",
     "pnpm": ">=7"
   },
+  "lib": {
+    "ikun-tool": "./bin/index.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "pnpm run --filter @ikun/core dev"
+    "watch": "webpack --config webpack.dev.js",
+    "dev": "npm run watch"
   },
   "repository": {
     "type": "git",
@@ -26,12 +30,12 @@
   },
   "homepage": "https://github.com/wljQAQ/ikun-tool#readme",
   "dependencies": {
-    "chalk": "^5.3.0",
-    "fs-extra": "^11.1.1"
   },
   "devDependencies": {
-    "@types/fs-extra": "^11.0.1",
-    "@types/node": "^20.5.7",
-    "typescript": "^5.2.2"
+    "@types/webpack": "^5.28.2",
+    "ts-loader": "^9.4.4",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-merge": "^5.9.0"
   }
 }
