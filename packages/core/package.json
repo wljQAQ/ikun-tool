@@ -8,7 +8,7 @@
     "node": ">=16.10.0",
     "pnpm": ">=7"
   },
-  "lib": {
+  "bin": {
     "ikun-tool": "./bin/index.js"
   },
   "scripts": {
@@ -29,8 +29,6 @@
     "url": "https://github.com/wljQAQ/ikun-tool/issues"
   },
   "homepage": "https://github.com/wljQAQ/ikun-tool#readme",
-  "dependencies": {
-  },
   "devDependencies": {
     "@types/webpack": "^5.28.2",
     "ts-loader": "^9.4.4",

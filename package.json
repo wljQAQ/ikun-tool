@@ -1,16 +1,12 @@
 {
-  "name": "ikun-tool",
-  "version": "1.0.0",
-  "description": "项目模板",
-  "main": "./dist/ikun-tool.js",
-  "module": "./dist/ikun-tool.js",
   "engines": {
     "node": ">=16.10.0",
     "pnpm": ">=7"
   },
+  "packageManager": "pnpm@8.7.6",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "pnpm run --filter @ikun/core dev"
+    "dev": "pnpm link @ikun/core && pnpm run --filter @ikun/core dev"
   },
   "repository": {
     "type": "git",
@@ -26,6 +22,7 @@
   },
   "homepage": "https://github.com/wljQAQ/ikun-tool#readme",
   "dependencies": {
+    "@ikun/core": "^1.0.0",
     "chalk": "^5.3.0",
     "fs-extra": "^11.1.1"
   },
