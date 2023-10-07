@@ -5,7 +5,7 @@ const path = require("path");
 class IkunPlugun {
   apply(compiler) {
     compiler.hooks.afterEmit.tapAsync("IkunPlugun", (compilation, callback) => {
-      spawn("npx", ["ikun-tool"], {
+      spawn("npx", ["create-ikun"], {
         cwd:path.join(__dirname,'../../..'),
         shell: true,
         stdio: "inherit",

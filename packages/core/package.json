@@ -1,15 +1,13 @@
 {
-  "name": "@ikun/core",
+  "name": "create-ikun",
   "version": "1.0.0",
   "description": "项目模板",
-  "main": "./dist/ikun-tool.js",
-  "module": "./dist/ikun-tool.js",
   "engines": {
     "node": ">=16.10.0",
     "pnpm": ">=7"
   },
   "bin": {
-    "ikun-tool": "./bin/index.js"
+    "create-ikun": "./bin/index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -24,19 +22,21 @@
     "template"
   ],
   "author": "wlj",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/wljQAQ/ikun-tool/issues"
   },
   "homepage": "https://github.com/wljQAQ/ikun-tool#readme",
   "devDependencies": {
+    "@types/minimist": "^1.2.3",
+    "@types/prompts": "^2.4.5",
     "@types/webpack": "^5.28.2",
+    "kolorist": "^1.8.0",
+    "minimist": "^1.2.8",
+    "prompts": "^2.4.2",
     "ts-loader": "^9.4.4",
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4",
     "webpack-merge": "^5.9.0"
-  },
-  "dependencies": {
-    "commander": "^11.0.0"
   }
 }

@@ -16,7 +16,7 @@ module.exports = {
     extensions: [".ts", ".js"],
   },
   output: {
-    filename: "ikun-tool.js",
+    filename: "index.js",
     globalObject: "this",
     path: path.resolve(__dirname, "dist"),
     library: {

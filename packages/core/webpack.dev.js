@@ -11,6 +11,6 @@ module.exports = merge(common, {
   },
   stats: 'errors-warnings',
   plugins: [
-    new IkunPlugun(),
+    // new IkunPlugun(),
   ],
 });

@@ -1,2 +1,2 @@
 #!/usr/bin/env node
-require("../dist/ikun-tool").run();
+require("../dist/index").run();
