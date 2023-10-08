@@ -3,7 +3,7 @@ import minimist from "minimist";
 import prompts from "prompts";
 import path from "path";
 import { fileURLToPath } from "url";
-import { readdir } from "fs/promises";
+import fs from "fs";
 import {
   blue,
   cyan,
@@ -31,10 +31,9 @@ const cwd = process.cwd();
 async function init() {
   const name = argv._[0];
   const templateName = argv.template || argv.t;
-
   //进入对话
-  const templates = await parseTemplates();
-  const result = await prompts([
+  const templates = parseTemplates();
+  const result: prompts.Answers<"projectName" | "template"> = await prompts([
     {
       type: name ? null : "text",
       name: "projectName",
@@ -52,24 +51,51 @@ async function init() {
       }),
     },
   ]);
+
+  const { template } = result;
+
+  //接着就是拷贝模板到目标目录
 }
 
-async function parseTemplates(): Promise<Templates> {
+//拷贝又分为 拷贝目录跟拷贝文件
+function copy(src: string, dest: string) {
+  const isDirectory = fs.statSync(src).isDirectory();
+
+  //如果是文件夹
+  if (isDirectory) {
+    copyDir(src, dest);
+  } else {
+    fs.copyFileSync(src, dest);
+  }
+}
+
+function copyDir(src: string, dest: string) {
+  //递归创建不存在的文件夹
+  fs.mkdirSync(dest, { recursive: true });
+
+  const templateFiles = fs.readdirSync(src);
+
+  for (const file of templateFiles) {
+    const srcFile = path.resolve(src, file);
+    const destFile = path.resolve(dest, file);
+    copy(srcFile, destFile);
+  }
+}
+
+function parseTemplates(): Templates {
   const root = fileURLToPath(import.meta.url);
   const templateRoot = path.join(root, "../../templates");
+  let result: Templates = [];
+  const files = fs.readdirSync(templateRoot);
+  result = files.map((i) => {
+    const startStr = i.split("-")[0];
+    return {
+      title: i,
+      color: COLOR_MAP[startStr] || reset,
+    };
+  });
 
-  try {
-    const files = await readdir(templateRoot);
-    return files.map((i) => {
-      const startStr = i.split("-")[0];
-      return {
-        title: i,
-        color: COLOR_MAP[startStr] || reset,
-      };
-    });
-  } catch (error) {
-    console.error(error);
-  }
+  return result;
 }
 
 export function run() {
