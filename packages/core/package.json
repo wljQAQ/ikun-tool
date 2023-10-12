@@ -1,6 +1,6 @@
 {
   "name": "create-ikun",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "项目模板",
   "engines": {
     "node": ">=16.10.0",
@@ -14,6 +14,12 @@
     "watch": "webpack --config webpack.dev.js",
     "dev": "npm run watch"
   },
+  "files": [
+    "bin",
+    "dist",
+    "templates",
+    "bin"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wljQAQ/ikun-tool.git"

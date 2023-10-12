@@ -4,23 +4,13 @@ import prompts from "prompts";
 import path from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
-import {
-  blue,
-  cyan,
-  green,
-  lightBlue,
-  lightGreen,
-  lightRed,
-  magenta,
-  red,
-  reset,
-  yellow,
-} from "kolorist";
+import { cyan, green, reset } from "kolorist";
 
 //拿到用户的所有参数
 
 const COLOR_MAP = {
   vue: green,
+  vue3: green,
   react: cyan,
 };
 
@@ -31,19 +21,35 @@ const cwd = process.cwd();
 
 //大致逻辑 如果有提供名称跟template名称就直接拷贝模板进去 否则就进入对话让用户选择
 async function init() {
-  const argv_name = argv._[0];
-  const argv_template = argv.template || argv.t;
+  const state = {
+    name: argv._[0],
+    template: argv.template || argv.t,
+    get targetPath() {
+      return path.resolve(cwd, state.name);
+    },
+    get sourcePath() {
+      return path.resolve(TEMPLATE_PATH, state.template.toString());
+    },
+  };
   //进入对话
   const templates = parseTemplates();
-  const result: prompts.Answers<"prompts_name" | "prompts_template"> = await prompts([
+  const result: prompts.Answers<"name" | "template" | "overwrite"> = await prompts([
     {
-      type: argv_name ? null : "text",
-      name: "prompts_name",
+      type: state.name ? null : "text",
+      name: "name",
       message: reset("请输入你的项目名称"),
+      onState(val: string | number) {
+        state.name = val.toString();
+      },
     },
     {
-      type: argv_template ? null : "select",
-      name: "prompts_template",
+      type: !fs.existsSync(state.targetPath) ? null : "confirm",
+      name: "overwrite",
+      message: reset("当前目录以存在是否进行覆盖"),
+    },
+    {
+      type: state.template ? null : "select",
+      name: "template",
       message: reset("请选择一个项目模板"),
       choices: templates.map((i) => {
         return {
@@ -51,19 +57,31 @@ async function init() {
           value: i.title,
         };
       }),
+      onState(select) {
+        state.template = select.value;
+      },
     },
   ]);
 
-  const { prompts_name, prompts_template } = result;
-  const name = argv_name || prompts_name;
-  const template = argv_template || prompts_template;
-  const src = path.resolve(TEMPLATE_PATH, template.toString());
-  const dest = path.resolve(cwd, name.toString());
+  const { name, targetPath, sourcePath } = state;
+  const { overwrite } = result;
+
+  if (overwrite) {
+    fs.rmSync(targetPath, { recursive: true, force: true });
+  }
 
   //
-  if (!fs.existsSync(dest)) fs.mkdirSync(dest);
+  if (!fs.existsSync(targetPath)) fs.mkdirSync(targetPath);
+
   //接着就是拷贝模板到目标目录
-  copy(src, dest);
+  copy(sourcePath, targetPath);
+
+  //更改packagename
+  const pkgSrcPath = path.join(sourcePath, "package.json");
+  const pkgDestPath = path.join(targetPath, "package.json");
+  const pkg = JSON.parse(fs.readFileSync(pkgSrcPath, "utf-8"));
+  pkg.name = name;
+  fs.writeFileSync(pkgDestPath, JSON.stringify(pkg, null, 2));
 }
 
 //拷贝又分为 拷贝目录跟拷贝文件
